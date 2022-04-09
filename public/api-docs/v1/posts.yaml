@@ -1,0 +1,67 @@
+PostListResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        $ref: '#/PostPreview'
+  required:
+    - data
+
+PostDetailResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/PostDetail'
+  required:
+    - data
+
+PostPreview:
+  type: object
+  properties:
+    id:
+      type: integer
+    code:
+      type: string
+    title:
+      type: string
+    author:
+      type: string
+      description: name of author
+    author_id:
+      type: string
+    tags:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+    created_at:
+      type: string
+      description: creation date
+    updated_at:
+      type: string
+      nullable: true
+      description: updation date
+  required:
+    - id
+    - code
+    - title
+    - author
+    - author_id
+    - tags
+    - created_at
+    - updated_at
+
+PostDetail:
+  allOf:
+    - $ref: '#/PostPreview'
+    - type: object
+      properties:
+        text:
+          type: string
+      required:
+        - text

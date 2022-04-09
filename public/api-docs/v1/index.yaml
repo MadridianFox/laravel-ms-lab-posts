@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Posts service
+  contact:
+    name: API Support
+    url: https://ensi.tech/contacts
+    email: mail@greensight.ru
+  version: 1.0.0
+  description: Posts service
+servers:
+  - url: /api/v1
+tags:
+  - name: posts
+    description: Посты
+paths:
+  /posts/:
+    get:
+      tags:
+        - posts
+      operationId: list
+      x-lg-handler: 'App\Http\ApiV1\Controllers\PostsController@list'
+      x-lg-route-name: 'list'
+      summary: Получить список постов
+      description: Получить список постов
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: './posts.yaml#/PostListResponse'
+        "500":
+          $ref: '#/components/responses/ServerError'
+  /posts/{code}:
+    get:
+      tags:
+        - posts
+      operationId: detail
+      x-lg-handler: 'App\Http\ApiV1\Controllers\PostsController@detail'
+      x-lg-route-name: 'detail'
+      parameters:
+        - name: code
+          in: path
+          schema:
+            type: string
+          required: true
+      summary: Получить один пост
+      description: Получить один пост
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: './posts.yaml#/PostDetailResponse'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+
+components:
+  parameters:
+    QueryInclude:
+      $ref: './common_parameters.yaml#/QueryInclude'
+    PathId:
+      $ref: './common_parameters.yaml#/PathId'
+  schemas:
+    EmptyDataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+        meta:
+          type: object
+      required:
+          - data
+    PaginationTypeEnum:
+      $ref: './common_schemas.yaml#/PaginationTypeEnum'
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'

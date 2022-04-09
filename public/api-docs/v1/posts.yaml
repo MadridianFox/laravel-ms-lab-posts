@@ -33,12 +33,7 @@ PostPreview:
     tags:
       type: array
       items:
-        type: object
-        properties:
-          id:
-            type: integer
-          name:
-            type: string
+        $ref: '#/Tag'
     created_at:
       type: string
       description: creation date
@@ -65,3 +60,11 @@ PostDetail:
           type: string
       required:
         - text
+
+Tag:
+  type: object
+  properties:
+    id:
+      type: integer
+    name:
+      type: string

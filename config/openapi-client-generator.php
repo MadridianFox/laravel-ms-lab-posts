@@ -57,7 +57,7 @@ return [
         /*
          * Package name for composer, use standard pattern namespace/package
          */
-        'composer_name' => 'lab/posts-service-client',
+        'composer_name' => 'lab/posts-client',
 
         /*
          * Specific generator params from https://openapi-generator.tech/docs/generators/php/
@@ -70,7 +70,7 @@ return [
         ],
 
 
-        'laravel_package_config_key' => 'openapi-clients.backend-service-skeleton',
+        'laravel_package_config_key' => 'openapi-clients.posts-client',
 
         'files_to_ignore_during_cleanup' => ['.git', '.gitignore'],
 

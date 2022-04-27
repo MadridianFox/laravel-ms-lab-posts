@@ -31,6 +31,31 @@ paths:
                 $ref: './posts.yaml#/PostListResponse'
         "500":
           $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - posts
+      operationId: create
+      x-lg-handler: 'App\Http\ApiV1\Controllers\PostsController@create'
+      x-lg-route-name: 'create'
+      summary: Создать пост
+      description: Создать пост
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './posts.yaml#/CreatePostRequest'
+      responses:
+        "201":
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: './posts.yaml#/CreatePostResponse'
+        "422":
+          $ref: '#/components/responses/BadRequest'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
   /posts/{code}:
     get:
       tags:

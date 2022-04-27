@@ -16,6 +16,44 @@ PostDetailResponse:
   required:
     - data
 
+CreatePostRequest:
+  type: object
+  properties:
+    code:
+      type: string
+    title:
+      type: string
+    author:
+      type: string
+    author_id:
+      type: string
+    tags:
+      type: array
+      items:
+        type: integer
+    text:
+      type: string
+  required:
+    - code
+    - title
+    - author
+    - author_id
+    - tags
+    - text
+
+CreatePostResponse:
+  type: object
+  properties:
+    data:
+      type: object
+      properties:
+        id:
+          type: integer
+      required:
+        - id
+  required:
+    - data
+
 PostPreview:
   type: object
   properties:

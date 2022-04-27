@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Post extends Model
 {
+    protected $guarded = false;
+
     public static function factory(): PostFactory
     {
         return PostFactory::new();
